@@ -57,7 +57,6 @@ C:\testeComeia\Atarefado\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
 C:\testeComeia\Atarefado\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
 C:\testeComeia\Atarefado\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\testeComeia\Atarefado\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
-C:\testeComeia\Atarefado\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\testeComeia\Atarefado\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
 C:\testeComeia\Atarefado\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
 C:\testeComeia\Atarefado\bin\Debug\net5.0\System.Runtime.Caching.dll
@@ -74,3 +73,5 @@ C:\testeComeia\Atarefado\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data
 C:\testeComeia\Atarefado\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\testeComeia\Atarefado\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\testeComeia\Atarefado\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\testeComeia\Atarefado\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\testeComeia\Atarefado\obj\Debug\net5.0\Atarefado.csproj.CopyComplete
