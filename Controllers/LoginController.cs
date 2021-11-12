@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Microsoft.AspNetCore.Cors;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Atarefado.Models;

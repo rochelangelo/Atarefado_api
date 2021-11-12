@@ -29,6 +29,80 @@ namespace Atarefado.Controllers
             return Ok(tarefas);
         }
 
+        [HttpGet]
+        [Route("tarefasTodos/{id}")]
+        public async Task<IActionResult> GetIdAsyncTodos([FromServices] AppDbContext context, [FromRoute] int id)
+        {
+            var tarefa = await context
+            .Tarefas
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.id == id);
+            return tarefa == null ? NotFound() : Ok(tarefa);
+        }
+
+        [HttpPost]
+        [Route("tarefasTodos")]
+        public async Task<IActionResult> PostAsyncTodos(
+            [FromServices] AppDbContext context,
+            [FromBody] CreateTarefaViewModel model)
+        {
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var tarefa = new Tarefa
+            {
+                data = model.Date,
+                nome = model.Name,
+                descricao = model.Description,
+                flag = false,
+                usuarioId = 0,
+            };
+
+            try
+            {
+                await context.Tarefas.AddAsync(tarefa);
+                await context.SaveChangesAsync();
+                return Created("v1/tarefasTodos/{tarefa.id}", tarefa);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+
+        }
+
+        [HttpPut]
+        [Route("tarefaTodosFinalizada/{id}")]
+        public async Task<IActionResult> PutFinishAsyncTodos(
+            [FromServices] AppDbContext context,
+            [FromRoute] int id)
+        {
+
+            var tarefa = await context.Tarefas.FirstOrDefaultAsync(x => x.id == id);
+
+            if (tarefa == null)
+                return NotFound("nao foi");
+
+            try
+            {
+
+                tarefa.flag = true;
+
+
+                context.Tarefas.Update(tarefa);
+                await context.SaveChangesAsync();
+                return Ok(tarefa);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+
+        }
+
+        /////////////
+
 
         [HttpGet]
         [Route("tarefas")]
@@ -101,7 +175,7 @@ namespace Atarefado.Controllers
 
             if (!ModelState.IsValid)
                 return BadRequest();
-            
+
             var userid = Int32.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
             var tarefa = await context.Tarefas.FirstOrDefaultAsync(x => x.usuarioId == userid && x.id == id);
 
@@ -132,18 +206,15 @@ namespace Atarefado.Controllers
         [Authorize]
         public async Task<IActionResult> PutFinishAsync(
             [FromServices] AppDbContext context,
-            [FromBody] CreateTarefaViewModel model,
             [FromRoute] int id)
         {
 
-            if (!ModelState.IsValid)
-                return BadRequest();
-            
+
             var userid = Int32.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var tarefa = await context.Tarefas.FirstOrDefaultAsync(x => x.usuarioId == userid && x.id == id);
+            var tarefa = await context.Tarefas.FirstOrDefaultAsync(x => x.id == id);
 
             if (tarefa == null)
-                return NotFound();
+                return NotFound("nao foi");
 
             try
             {
